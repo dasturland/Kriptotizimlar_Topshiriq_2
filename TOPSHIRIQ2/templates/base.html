@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kriptotizim - Sadullayev Jaxongir</title>
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-brand">KRIPTOTIZIM</div>
+      <ul class="navbar-nav">
+        <li><a href="/">Bosh sahifa</a></li>
+        {% if session.username %}
+          <li><a href="/messages">Xabarlar</a></li>
+          <li><a href="/secret_sharing">Sirni taqsimlash</a></li>
+          {% if session.role == 'admin' %}
+            <li><a href="/admin">Boshqaruv</a></li>
+            <li><a href="/audit">Audit</a></li>
+          {% endif %}
+          <li><a href="/logout">Chiqish ({{ session.username }})</a></li>
+        {% else %}
+          <li><a href="/login">Kirish</a></li>
+          <li><a href="/register">Ro'yxatdan o'tish</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>

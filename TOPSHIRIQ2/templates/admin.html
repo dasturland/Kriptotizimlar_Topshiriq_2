@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Boshqaruv paneli</h2>
+  </div>
+  
+  <h3 style="color: var(--primary-green); margin-bottom: 1rem;">Foydalanuvchilar ro'yxati</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Foydalanuvchi</th>
+        <th>Rol</th>
+        <th>Amal</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+      <tr>
+        <td>{{ u[0] }}</td>
+        <td>{{ u[1] }}</td>
+        <td>
+          {% if u[2] == 'boshliq' %}
+            <span class="badge badge-boshliq">Boshliq</span>
+          {% elif u[2] == 'xodim' %}
+            <span class="badge badge-xodim">Xodim</span>
+          {% elif u[2] == 'xaker' %}
+            <span class="badge badge-xaker">Xaker</span>
+          {% else %}
+            <span class="badge">{{ u[2] }}</span>
+          {% endif %}
+        </td>
+        <td>
+          <a href="/delete_user/{{ u[0] }}" class="btn btn-danger" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">O'chirish</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

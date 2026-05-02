@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="hero-section">
+  <h1 class="hero-title">Boshliq va Xodim</h1>
+  <p class="hero-subtitle">Kriptografik xavfsizlik tizimi - Sirni taqsimlash va himoyalash</p>
+  {% if not session.username %}
+    <div style="margin-top: 2rem;">
+      <a href="/login" class="btn btn-primary">Tizimga kirish</a>
+      <a href="/register" class="btn btn-secondary" style="margin-left: 1rem;">Ro'yxatdan o'tish</a>
+    </div>
+  {% endif %}
+</div>
+
+<div class="grid-3">
+  <div class="feature-card">
+    <div class="feature-icon">🔐</div>
+    <h3 class="feature-title">Sirni Taqsimlash</h3>
+    <p class="feature-desc">Shamir sxemasi yordamida sirni 3 ta ulushga bolish va xodimlarga yuborish</p>
+  </div>
+  
+  <div class="feature-card">
+    <div class="feature-icon">📨</div>
+    <h3 class="feature-title">Xabar Xavfsizligi</h3>
+    <p class="feature-desc">HMAC-SHA256 va raqamli imzo bilan xabarlarni himoyalash</p>
+  </div>
+  
+  <div class="feature-card">
+    <div class="feature-icon">🛡️</div>
+    <h3 class="feature-title">Rollar Tizimi</h3>
+    <p class="feature-desc">Boshliq, Xodim va Xaker rollari orqali huquqlarni boshqarish</p>
+  </div>
+</div>
+
+<div class="card" style="margin-top: 2rem;">
+  <h3 style="margin-bottom: 1rem; color: var(--primary-green);">Tizim Haqida</h3>
+  <p style="color: var(--text-secondary); line-height: 1.8;">
+    Ushbu tizim kriptografik xavfsizlik tamoyillarini amaliyotda ko'rsatish uchun yaratilgan. 
+    Boshliq muhim sirlarni 3 ta ulushga bolib, xodimlarga yuboradi. Xaker roli esa 
+    kamida 2 ta ulushni yig'ib sirni qayta tiklashga harakat qiladi.
+  </p>
+  <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">
+    Sadullayev Jaxongir, 172-23 guruh talabasi
+  </p>
+</div>
+{% endblock %}

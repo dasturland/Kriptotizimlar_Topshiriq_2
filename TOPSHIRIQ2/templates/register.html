@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card" style="max-width: 600px; margin: 3rem auto;">
+  <div class="card-header">
+    <h2 class="card-title">Ro'yxatdan o'tish</h2>
+  </div>
+  <form method="post" id="regform">
+    <div class="form-group">
+      <label class="form-label">Foydalanuvchi nomi</label>
+      <input type="text" name="username" class="form-control" required placeholder="Foydalanuvchi nomini tanlang">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Parol</label>
+      <input type="password" name="password" id="password" class="form-control" required placeholder="Kuchli parol kiriting">
+    </div>
+    {% if not boshliq_exists %}
+    <div class="form-group">
+      <label class="form-label">Rol</label>
+      <select name="role" class="form-control">
+        <option value="boshliq">Boshliq</option>
+        <option value="xodim">Xodim</option>
+        <option value="xaker">Xaker</option>
+      </select>
+    </div>
+    {% else %}
+    <div class="form-group">
+      <label class="form-label">Rol</label>
+      <select name="role" class="form-control">
+        <option value="xodim">Xodim</option>
+        <option value="xaker">Xaker</option>
+      </select>
+      <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">Boshliq roli allaqachon mavjud</p>
+    </div>
+    {% endif %}
+    <button type="submit" class="btn btn-primary" style="width: 100%;">Ro'yxatdan o'tish</button>
+  </form>
+  
+  <div style="margin-top: 2rem; padding: 1.5rem; background: var(--input-bg); border-radius: 8px;">
+    <h4 style="color: var(--primary-green); margin-bottom: 1rem;">Parol talablari:</h4>
+    <ul style="list-style: none; padding: 0;">
+      <li id="len" style="color: var(--text-muted); margin-bottom: 0.5rem;">✗ Kamida 8 belgi</li>
+      <li id="upper" style="color: var(--text-muted); margin-bottom: 0.5rem;">✗ Katta harf</li>
+      <li id="lower" style="color: var(--text-muted); margin-bottom: 0.5rem;">✗ Kichik harf</li>
+      <li id="digit" style="color: var(--text-muted); margin-bottom: 0.5rem;">✗ Raqam</li>
+      <li id="special" style="color: var(--text-muted); margin-bottom: 0.5rem;">✗ Maxsus belgi</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+const pw = document.getElementById('password');
+pw.addEventListener('input', function() {
+  const checks = [
+    { id: 'len', test: pw.value.length >= 8 },
+    { id: 'upper', test: /[A-Z]/.test(pw.value) },
+    { id: 'lower', test: /[a-z]/.test(pw.value) },
+    { id: 'digit', test: /[0-9]/.test(pw.value) },
+    { id: 'special', test: /[!@#$%^&*()_+\-=[\]{};:\\|,.<>\/?]/.test(pw.value) }
+  ];
+  
+  checks.forEach(function(check) {
+    const el = document.getElementById(check.id);
+    if (check.test) {
+      el.style.color = 'var(--success)';
+      el.textContent = el.textContent.replace('✗', '✓');
+    } else {
+      el.style.color = 'var(--text-muted)';
+      el.textContent = el.textContent.replace('✓', '✗');
+    }
+  });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card" style="max-width: 500px; margin: 3rem auto;">
+  <div class="card-header">
+    <h2 class="card-title">Tizimga kirish</h2>
+  </div>
+  <form method="post">
+    <div class="form-group">
+      <label class="form-label">Foydalanuvchi nomi</label>
+      <input type="text" name="username" class="form-control" required placeholder="Foydalanuvchi nomini kiriting">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Parol</label>
+      <input type="password" name="password" class="form-control" required placeholder="Parolni kiriting">
+    </div>
+    <button type="submit" class="btn btn-primary" style="width: 100%;">Kirish</button>
+  </form>
+</div>
+{% endblock %}
